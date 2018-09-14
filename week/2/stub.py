@@ -19,7 +19,7 @@ def brute_force():
         s.send(("{password}\n").format(password=password))
         data = s.recv(1024)     # Receives 1024 bytes from IP/Port
         print(data)                         # Prints data
-        if "Fail" not in data:
+        if "Success" in data:
             print(password)
             break
         
