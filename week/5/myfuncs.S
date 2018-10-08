@@ -13,7 +13,7 @@ my_memset:
 my_memloop:
 	cmp rcx, rdx ; rdx holds the string lenDo the index comparison
 	jge mem_done ; Quit if we have reached the end of string
-	mov[rid+rcx], rsi ; Move the char into the memory address.Rcx for increment
+	mov byte [rdi+rcx], sil ; Move the char into the memory address. Rcx for increment
 	inc rcx ; rcx ++
 	jmp my_memloop ; restarted loop
 
@@ -36,8 +36,8 @@ my_strncpy:
 my_strloop:
 	cmp rcx, rdx ; Do the length comparison
 	jge str_done ; Quit if end is reached
-	mov r10, [rsi+rcx] ; Move char from source to a temp register
-	mov [rdi+rcx],r10 ; Move char from temp to new destination
+	mov bl, [rsi+rcx] ; Move char from source to a temp register
+	mov byte [rdi+rcx], bl; Move char from temp to new destination
 	inc rcx ; rcx++
 	jmp my_strloop ; restart  
 
