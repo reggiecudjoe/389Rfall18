@@ -8,12 +8,12 @@ my_memset:
         push rbp      ;saves the base pointer for the previous function's stack frame
         mov rbp, rsp  ;moves up the base pointer to the top of the stack to create a new frame      
         mov rcx, 0 ;  General purpose counter register. 
-  		call my_memloop ; Calls loop 
+  		jmp my_memloop ; Calls loop 
 
 my_memloop:
 	cmp rcx, rdx ; rdx holds the string lenDo the index comparison
 	jge mem_done ; Quit if we have reached the end of string
-	mov byte [rdi+rcx], sil ; Move the char into the memory address. Rcx for increment
+	mov [rdi+rcx], sil ; Move the char into the memory address. Rcx for increment
 	inc rcx ; rcx ++
 	jmp my_memloop ; restarted loop
 
@@ -30,7 +30,7 @@ my_strncpy:
         mov rbp, rsp  ;moves up the base pointer to the top of the stack to create a new frame
 
         mov rcx, 0 ; Create index 
-        call my_strloop ; Call loop 
+        jmp my_strloop ; Call loop 
 
 my_strloop:
 	cmp rcx, rdx ; Do the length comparison
