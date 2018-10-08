@@ -24,7 +24,6 @@ mem_done:
         ret           ;jumps to the top value on the stack, hopefully the return address!
 
 
-
 global my_strncpy     ;export the 'my_strncpy' symbol to be accessible outside of file
 my_strncpy:
         push rbp      ;saves the base pointer for the previous function's stack frame
@@ -40,8 +39,6 @@ my_strloop:
 	mov byte [rdi+rcx], bl; Move char from temp to new destination
 	inc rcx ; rcx++
 	jmp my_strloop ; restart  
-
-
 
 str_done:
         leave         ;moves down the stack pointer to the current base pointer,
