@@ -16,4 +16,4 @@ Part 1 was somewhat difficult because I ran into a few issues. Step was easy: af
 
 
 ### Part 2 (30 Pts)
-This part was not very difficult. I intially ran "gpg --gen -key", inputed a name, email, and then a password to create a public key. After this, I imported the pgpassigment.key using "gpg --import pgpassignment.key" and after a delay it outputted the recipient email "president@csec.umiac.umd.edu". Lastly, i used "gpg --output message.secret --encrypt --recipient president@csec.umiac.umd.edu "hello" to encrypt the file "hello" as message.secret. 
+This part was not very difficult. I intially ran "gpg --gen-key", inputed a name, email, and then a password to create a public key. After this, I imported the pgpassigment.key using "gpg --import pgpassignment.key" and after a delay it outputted the recipient email "president@csec.umiac.umd.edu". Lastly, i used "gpg --output message.secret --encrypt --recipient president@csec.umiac.umd.edu "hello" to encrypt the file "hello" as message.secret. 
