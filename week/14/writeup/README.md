@@ -1,6 +1,5 @@
 Writeup 10 - Crypto II
 =====
-5'or'1'='1
 Name: Reginald Cudjoe
 Section: 0101
 
